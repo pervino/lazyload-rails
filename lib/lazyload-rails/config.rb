@@ -33,7 +33,7 @@ module Lazyload
         @lazy_class
       end
       def lazy_class=(lazy_class)
-        @lazy_class = !!lazy_class
+        @lazy_class = lazy_class
       end
 
       # Set default settings
