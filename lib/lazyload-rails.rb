@@ -39,6 +39,9 @@ ActionView::Helpers::AssetTagHelper.module_eval do
 
     is_lazy = options.fetch(:lazy) { Lazyload::Rails.configuration.lazy_by_default }
 
+    puts '------------------'
+    puts image_html 
+    puts is_lazy
     if is_lazy
       to_lazy(image_html)
     else
