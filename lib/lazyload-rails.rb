@@ -55,15 +55,14 @@ ActionView::Helpers::AssetTagHelper.module_eval do
     puts '------------------'
     img = Nokogiri::HTML::DocumentFragment.parse(image_html).at_css("img")
 
+    puts imimage_htmlg 
     puts img 
-    puts img["class"].to_str
     puts img["class"].to_s
-    puts img["className"]
 
     img["data-original"] = img["src"]
     img["src"] = Lazyload::Rails.configuration.placeholder
     if Lazyload::Rails.configuration.lazy_class
-      img["class"] = img["class"].present? ? img["class"].to_str + " " + Lazyload::Rails.configuration.lazy_class : Lazyload::Rails.configuration.lazy_class 
+      img["class"] = img["class"].present? ? img["class"].to_s + " " + Lazyload::Rails.configuration.lazy_class : Lazyload::Rails.configuration.lazy_class 
     end
     
 
