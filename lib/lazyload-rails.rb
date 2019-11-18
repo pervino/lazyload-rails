@@ -54,10 +54,11 @@ ActionView::Helpers::AssetTagHelper.module_eval do
 
   def to_lazy(image_html, classes)
     puts '------------------'
-    puts img 
-    puts img["class"] 
     puts classes
     img = Nokogiri::HTML::DocumentFragment.parse(image_html).at_css("img")
+
+    puts img 
+    puts img["class"] 
 
     img["data-original"] = img["src"]
     img["src"] = Lazyload::Rails.configuration.placeholder
