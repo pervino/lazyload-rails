@@ -28,7 +28,7 @@ module Lazyload
         @lazy_by_default
       end
 
-      # When set to true every image_tag with { lazy: true } will include the lazy_class
+      # When { lazy: true } image_tag will include the lazy_class
       def lazy_class=(lazy_class)
         @lazy_class = !!lazy_class
       end
