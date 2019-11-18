@@ -56,6 +56,9 @@ ActionView::Helpers::AssetTagHelper.module_eval do
     if Lazyload::Rails.configuration.lazy_class
       img["class"] = img["class"].present? ? img["class"] + " " + Lazyload::Rails.configuration.lazy_class : Lazyload::Rails.configuration.lazy_class 
     end
+    
+    puts '------------------'
+    puts img 
 
     img.to_s.html_safe
   end
