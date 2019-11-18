@@ -36,7 +36,6 @@ ActionView::Helpers::AssetTagHelper.module_eval do
   def image_tag(*attrs)
     options, args = extract_options_and_args(*attrs)
     image_html = rails_image_tag(*args)
-    classes = image_html["class"]
 
     is_lazy = options.fetch(:lazy) { Lazyload::Rails.configuration.lazy_by_default }
 
@@ -44,7 +43,7 @@ ActionView::Helpers::AssetTagHelper.module_eval do
     puts image_html 
     puts is_lazy
     if is_lazy
-      to_lazy(image_html , classes)
+      to_lazy(image_html)
     else
       image_html
     end
@@ -52,9 +51,8 @@ ActionView::Helpers::AssetTagHelper.module_eval do
 
   private
 
-  def to_lazy(image_html, classes)
+  def to_lazy(image_html)
     puts '------------------'
-    puts classes
     img = Nokogiri::HTML::DocumentFragment.parse(image_html).at_css("img")
 
     puts img 
