@@ -29,11 +29,11 @@ module Lazyload
       end
 
       # When { lazy: true } image_tag will include the lazy_class
-      def lazy_class=(lazy_class)
-        @lazy_class = !!lazy_class
-      end
       def lazy_class
         @lazy_class
+      end
+      def lazy_class=(lazy_class)
+        @lazy_class = !!lazy_class
       end
 
       # Set default settings
