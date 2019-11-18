@@ -59,6 +59,7 @@ ActionView::Helpers::AssetTagHelper.module_eval do
     
     puts '------------------'
     puts img 
+    puts img["class"] 
 
     img.to_s.html_safe
   end
