@@ -40,7 +40,7 @@ module Lazyload
       def initialize
         @placeholder = "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs="
         @lazy_by_default = false
-        @lazy_class = true
+        @lazy_class = "lazy_image"
       end
     end
   end
