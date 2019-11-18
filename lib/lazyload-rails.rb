@@ -41,6 +41,7 @@ ActionView::Helpers::AssetTagHelper.module_eval do
 
     puts '------------------'
     puts image_html 
+    puts image_html["class"]
     puts is_lazy
     if is_lazy
       to_lazy(image_html)
@@ -55,7 +56,7 @@ ActionView::Helpers::AssetTagHelper.module_eval do
     puts '------------------'
     img = Nokogiri::HTML::DocumentFragment.parse(image_html).at_css("img")
 
-    puts imimage_htmlg 
+    puts image_html 
     puts img 
     puts img["class"].to_s
 
