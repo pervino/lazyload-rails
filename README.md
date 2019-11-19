@@ -78,6 +78,10 @@ Lazyload::Rails.configure do |config|
   # This can be easily customized:
   config.placeholder = "/public/img/grey.gif"
 
+  # By default lazy_css_class is nil. 
+  # If configured a css class will be added to all image_tag's with lazy: true for easy styling
+  config.lazy_css_class = "lazy_images"
+
   # image_tag can return lazyload-friendly images by default,
   # no need to pass the { lazy: true } option
   config.lazy_by_default = true
