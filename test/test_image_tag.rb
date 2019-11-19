@@ -26,6 +26,7 @@ class TestImageTag < ::ActionView::TestCase
     img = parse(image_tag("foo.png", size: "101x151"))
 
     assert_match %r(^.*foo.png$), img["data-original"]
+    assert_equal nil, img["class"]
     assert_equal "151", img["height"]
     assert_equal "101", img["width"]
   end
