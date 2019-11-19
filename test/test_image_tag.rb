@@ -10,8 +10,10 @@ class TestImageTag < ::ActionView::TestCase
 
   def test_lazy_option_sets_lazy_attributes
     img = parse(image_tag("foo.png", size: "101x151", lazy: true))
+    img["class"] = "foo"
 
     assert_match %r(^.*foo.png$), img["data-original"]
+    assert_equal "foo", img["class"]
     assert_equal "151", img["height"]
     assert_equal "101", img["width"]
   end
@@ -24,6 +26,7 @@ class TestImageTag < ::ActionView::TestCase
     img = parse(image_tag("foo.png", size: "101x151"))
 
     assert_match %r(^.*foo.png$), img["data-original"]
+    assert_equal nil, img["class"]
     assert_equal "151", img["height"]
     assert_equal "101", img["width"]
   end
@@ -36,6 +39,7 @@ class TestImageTag < ::ActionView::TestCase
     img = parse(image_tag("foo.png", size: "101x151", lazy: false))
 
     assert_nil img["data-original"]
+    assert_equal nil, img["class"]
     assert_match %r(^.*foo.png$), img["src"]
   end
 
@@ -55,6 +59,7 @@ class TestImageTag < ::ActionView::TestCase
     img = parse(image_tag("baz.png", size: "100x250", lazy: true))
 
     assert_equal "/public/img/grey.gif", img["src"]
+    assert_equal nil, img["class"]
     assert_match %r(^.*baz.png$), img["data-original"]
   end
 
@@ -64,6 +69,8 @@ class TestImageTag < ::ActionView::TestCase
       { size: "100x150" }
     ].each do |opts|
       img = parse(image_tag("foo.png", size: "100x150", lazy: false))
+
+      assert_equal nil, img["class"]
       assert_equal "150", img["height"]
       assert_equal "100", img["width"]
     end
@@ -71,9 +78,28 @@ class TestImageTag < ::ActionView::TestCase
 
   def test_empty_options_return_nonlazy_img
     img = parse(image_tag("foo.png"))
+    img["class"] = "foo"
 
     assert_nil img["data-original"]
+    assert_equal "foo", img["class"]
     assert_match %r(^.*foo.png$), img["src"]
+  end
+
+  def test_lazy_css_class
+    Lazyload::Rails.configure do |config|
+      config.lazy_css_class = "lazy-img"
+    end
+    img = parse(image_tag("foo.png", lazy: true))
+    assert_equal "lazy-img", img["class"]
+  end
+
+  def test_lazy_css_class_with_class_already_assigned
+    Lazyload::Rails.configure do |config|
+      config.lazy_css_class = "lazy-img"
+    end
+    img = parse(image_tag("foo.png", lazy: true))
+    img["class"] = "foo"
+    assert_equal "foo lazy-img", img["class"]
   end
 
   private
